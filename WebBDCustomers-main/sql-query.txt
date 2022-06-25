@@ -1,0 +1,63 @@
+create table client (
+
+idClient int not null primary key generated always as identity (start with 1, increment by 1),
+
+deviceType varchar(100),
+
+model varchar(100),
+
+ip varchar(100)
+
+);
+
+insert into client (deviceType, model, ip) values ('Phone', 'Sumsung', '192.168.23.56');
+
+insert into client (deviceType, model, ip) values ('PC', 'JTX-880', '192.168.34.34');
+
+insert into client (deviceType, model, ip) values ('PC', 'Laptop', '192.168.33.111');
+
+insert into client (deviceType, model, ip) values ('Phone', 'Apple', '192.168.34.8');
+
+insert into client (deviceType, model, ip) values ('Phone', 'Apple', '192.168.1.1');
+
+insert into client (deviceType, model, ip) values ('Laptop', 'ХХ-39', '192.169.100.34');
+
+select * from client;
+
+drop table client;
+
+drop table address;
+
+create table address (
+
+id int not null primary key generated always as identity (start with 1, increment by 1),
+
+idClient int not null,
+
+city varchar(100),
+
+street varchar(100),
+
+num int,
+
+subnum int,
+
+flat int,
+
+extra varchar(200)
+
+);
+
+alter table address add foreign key (idClient) references client (idClient);
+
+insert into address (idClient, city, street, num, subnum, flat, extra) values (1, 'Санкт-Петербург', 'ул. Ленина', 25, 3, 334, 'After zoo shop');
+
+insert into address (idClient, city, street, num, subnum, flat, extra) values (2, 'Санкт-Петербург', 'ул. Ушакова', 34, 1, 12, 'Under the bridge');
+
+insert into address (idClient, city, street, num, subnum, flat, extra) values (1, 'Москва', 'ул. Ежова', 34, 2, 12, 'No data');
+
+insert into address (idClient, city, street, num, subnum, flat, extra) values (3, 'Санкт-Петербург', 'ул. Ленина', 36, 4, 44, 'Bad address');
+
+insert into address (idClient, city, street, num, subnum, flat, extra) values (4, 'Новосибирск', 'пр. Богатырский', 323, 1, 21, 'None');
+
+select * from address;
